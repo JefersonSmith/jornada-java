@@ -80,6 +80,12 @@ public class Main {
                                 passageiroDAO.atualizarPassageiro(passageiro);
                                 break;
 
+                            case 3:
+                                System.out.println("Digite o ID do passageiro que deseja excluir: ");
+                                id = sc.nextInt();
+                                passageiroDAO.excluirPassageiro(id);
+                                break;
+
                             case 4:
                                 System.out.println("Listando passageiros...");
                                 for (Passageiro p : passageiroDAO.listarPassageiros()) {
@@ -147,6 +153,12 @@ public class Main {
                                 destino.setPais(pais);
                                 destino.setPreco(preco);
                                 destinoDAO.atualizarDestino(destino);
+                                break;
+
+                            case 3:
+                                System.out.println("Digite o ID do destino que deseja excluir: ");
+                                id = sc.nextInt();
+                                destinoDAO.excluirDestino(id);
                                 break;
 
                             case 4:

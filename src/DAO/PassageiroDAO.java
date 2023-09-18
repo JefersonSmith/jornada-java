@@ -29,18 +29,6 @@ public class PassageiroDAO {
             System.out.println("Passageiro cadastrado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro ao cadastrar passageiro: " + e.getMessage());
-        } finally {
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-
-            } catch (Exception e) {
-                System.out.println("Erro ao fechar conexão: " + e.getMessage());
-            }
         }
     }
 
@@ -60,18 +48,21 @@ public class PassageiroDAO {
             System.out.println("Passageiro atualizado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro ao atualizar passageiro: " + e.getMessage());
-        } finally {
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
+        }
+    }
 
-            } catch (Exception e) {
-                System.out.println("Erro ao fechar conexão: " + e.getMessage());
-            }
+    public void excluirPassageiro(int id) {
+
+        String sql = "DELETE FROM passageiros WHERE id = ?";
+
+        try {
+            conn = conexao.Conexao.getConnection();
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, id);
+            pstm.execute();
+            System.out.println("Passageiro excluído com sucesso!");
+        } catch (Exception e) {
+            System.out.println("Erro ao excluir passageiro: " + e.getMessage());
         }
     }
 
@@ -99,21 +90,6 @@ public class PassageiroDAO {
         } catch (Exception e) {
             System.out.println("Erro ao listar passageiros: " + e.getMessage());
             return null;
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pstm != null) {
-                    pstm.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-
-            } catch (Exception e) {
-                System.out.println("Erro ao fechar conexão: " + e.getMessage());
-            }
         }
         return passageiros;
 

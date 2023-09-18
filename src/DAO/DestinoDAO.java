@@ -29,18 +29,6 @@ public class DestinoDAO {
             System.out.println("Destino cadastrado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro ao cadastrar destino: " + e.getMessage());
-        } finally {
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-
-            } catch (Exception e) {
-                System.out.println("Erro ao fechar conexão: " + e.getMessage());
-            }
         }
     }
 
@@ -60,18 +48,21 @@ public class DestinoDAO {
             System.out.println("Destino atualizado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro ao atualizar destino: " + e.getMessage());
-        } finally {
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
+        }
+    }
 
-            } catch (Exception e) {
-                System.out.println("Erro ao fechar conexão: " + e.getMessage());
-            }
+    public void excluirDestino(int id) {
+
+        String sql = "DELETE FROM destinos WHERE id = ?";
+
+        try {
+            conn = Conexao.getConnection();
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, id);
+            pstm.execute();
+            System.out.println("Destino excluído com sucesso!");
+        } catch (Exception e) {
+            System.out.println("Erro ao excluir destino: " + e.getMessage());
         }
     }
 
@@ -99,21 +90,6 @@ public class DestinoDAO {
         } catch (Exception e) {
             System.out.println("Erro ao listar destinos: " + e.getMessage());
             return null;
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pstm != null) {
-                    pstm.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-
-            } catch (Exception e) {
-                System.out.println("Erro ao fechar conexão: " + e.getMessage());
-            }
         }
         return destinos;
 
