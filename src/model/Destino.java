@@ -3,7 +3,6 @@ package model;
 public class Destino {
 
     private int id;
-    private String dia;
     private String cidade;
     private String pais;
     private Double preco;
@@ -14,14 +13,6 @@ public class Destino {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getDia() {
-        return dia;
-    }
-
-    public void setDia(String dia) {
-        this.dia = dia;
     }
 
     public String getCidade() {

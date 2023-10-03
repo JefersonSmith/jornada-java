@@ -119,8 +119,6 @@ public class Main {
 
                         switch (opcao1) {
                             case 1:
-                                System.out.println("Digite o dia da viagem: ");
-                                dia = sc.next();
                                 System.out.println("Digite a cidade do destino: ");
                                 cidade = sc.next();
                                 System.out.println("Digite o país do destino: ");
@@ -128,7 +126,6 @@ public class Main {
                                 System.out.println("Digite o preço do destino: ");
                                 preco = sc.nextDouble();
 
-                                destino.setDia(dia);
                                 destino.setCidade(cidade);
                                 destino.setPais(pais);
                                 destino.setPreco(preco);
@@ -138,8 +135,6 @@ public class Main {
                             case 2:
                                 System.out.println("Digite o ID do destino que deseja editar: ");
                                 int id = sc.nextInt();
-                                System.out.println("Digite o dia da viagem: ");
-                                dia = sc.next();
                                 System.out.println("Digite a cidade do destino: ");
                                 cidade = sc.next();
                                 System.out.println("Digite o país do destino: ");
@@ -148,7 +143,6 @@ public class Main {
                                 preco = sc.nextDouble();
 
                                 destino.setId(id);
-                                destino.setDia(dia);
                                 destino.setCidade(cidade);
                                 destino.setPais(pais);
                                 destino.setPreco(preco);
@@ -165,7 +159,6 @@ public class Main {
                                 System.out.println("Listando destinos...");
                                 for (Destino d : destinoDAO.listarDestinos()) {
                                     System.out.println("ID: " + d.getId());
-                                    System.out.println("dia: " + d.getDia());
                                     System.out.println("Cidade: " + d.getCidade());
                                     System.out.println("País: " + d.getPais());
                                     System.out.println("Preço: " + d.getPreco());

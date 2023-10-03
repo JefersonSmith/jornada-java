@@ -16,15 +16,14 @@ public class DestinoDAO {
 
     public void cadastrarDestino(Destino destino) {
 
-        String sql = "INSERT INTO destinos (dia, cidade, pais, preco) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO destinos (cidade, pais, preco) VALUES (?, ?, ?)";
 
         try {
             conn = Conexao.getConnection();
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, destino.getDia());
-            pstm.setString(2, destino.getCidade());
-            pstm.setString(3, destino.getPais());
-            pstm.setDouble(4, destino.getPreco());
+            pstm.setString(1, destino.getCidade());
+            pstm.setString(2, destino.getPais());
+            pstm.setDouble(3, destino.getPreco());
             pstm.execute();
             System.out.println("Destino cadastrado com sucesso!");
         } catch (Exception e) {
@@ -39,11 +38,10 @@ public class DestinoDAO {
         try {
             conn = Conexao.getConnection();
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, destino.getDia());
-            pstm.setString(2, destino.getCidade());
-            pstm.setString(3, destino.getPais());
-            pstm.setDouble(4, destino.getPreco());
-            pstm.setInt(5, destino.getId());
+            pstm.setString(1, destino.getCidade());
+            pstm.setString(2, destino.getPais());
+            pstm.setDouble(3, destino.getPreco());
+            pstm.setInt(4, destino.getId());
             pstm.execute();
             System.out.println("Destino atualizado com sucesso!");
         } catch (Exception e) {
@@ -80,7 +78,6 @@ public class DestinoDAO {
             while (rs.next()) {
                 Destino destino = new Destino();
                 destino.setId(rs.getInt("id"));
-                destino.setDia(rs.getString("dia"));
                 destino.setCidade(rs.getString("cidade"));
                 destino.setPais(rs.getString("pais"));
                 destino.setPreco(rs.getDouble("preco"));
