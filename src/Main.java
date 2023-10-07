@@ -19,7 +19,7 @@ public class Main {
 
         DestinoDAO destinoDAO = new DestinoDAO();
         Destino destino = new Destino();
-        String dia, cidade, pais = "";
+        String cidade, pais = "";
         double preco = 0.0;
 
 
@@ -27,6 +27,7 @@ public class Main {
             System.out.println("======== JORNADA ========");
             System.out.println("[1] - Cadastro de passageiros");
             System.out.println("[2] - Cadastro de destinos");
+            System.out.println("[3] - Cadastro de viagens");
             System.out.println("[5] - Sair");
             opcao = sc.nextInt();
 
@@ -39,6 +40,7 @@ public class Main {
                         System.out.println("[3] - Excluir passageiro");
                         System.out.println("[4] - Listar passageiros");
                         System.out.println("[5] - Voltar ao menu principal");
+
 
                         opcao1 = sc.nextInt();
 
@@ -173,7 +175,60 @@ public class Main {
                         }
                     } while (opcao1 != 5);
                     break;
+                }
+                case 3: {
+                    System.out.println("======== MENU DE VIAGENS ========");
+                    System.out.println("[1] - Cadastrar viagem");
+                    System.out.println("[2] - Editar viagem");
+                    System.out.println("[3] - Excluir viagem");
+                    System.out.println("[4] - Listar viagens");
+                    System.out.println("[5] - Voltar ao menu principal");
 
+                    opcao1 = sc.nextInt();
+
+                    switch (opcao1) {
+                        case 1:
+                            System.out.println("Digite o ID do passageiro: ");
+                            int idPassageiro = sc.nextInt();
+                            System.out.println("Digite o ID do destino: ");
+                            int idDestino = sc.nextInt();
+                            System.out.println("Digite a data de ida: ");
+                            String ida = sc.next();
+                            System.out.println("Digite a data de volta: ");
+                            String volta = sc.next();
+
+                            break;
+
+                        case 2:
+                            System.out.println("Digite o ID da viagem que deseja editar: ");
+                            int id = sc.nextInt();
+                            System.out.println("Digite o ID do passageiro: ");
+                            idPassageiro = sc.nextInt();
+                            System.out.println("Digite o ID do destino: ");
+                            idDestino = sc.nextInt();
+                            System.out.println("Digite a data de ida: ");
+                            ida = sc.next();
+                            System.out.println("Digite a data de volta: ");
+                            volta = sc.next();
+
+                            break;
+
+                        case 3:
+                            System.out.println("Digite o ID da viagem que deseja excluir: ");
+                            id = sc.nextInt();
+                            break;
+
+                        case 4:
+                            System.out.println("Listando viagens...");
+                            break;
+
+                        case 5:
+                            System.out.println("Saindo...");
+                            break;
+                        default:
+                            System.out.println("Opção inválida!");
+                            break;
+                    }
                 }
             }
         }

@@ -1,10 +1,13 @@
 package model;
 
+import java.time.LocalDateTime;
+
 public class Viagem {
     private int id;
     private Passageiro passageiro;
     private Destino destino;
-    private int dia;
+    private LocalDateTime ida;
+    private LocalDateTime volta;
 
     public int getId() {
         return id;
@@ -30,12 +33,20 @@ public class Viagem {
         this.destino = destino;
     }
 
-    public int getDia() {
-        return dia;
+    public LocalDateTime getIda() {
+        return ida;
     }
 
-    public void setDia(int dia) {
-        this.dia = dia;
+    public void setIda(LocalDateTime ida) {
+        this.ida = ida;
+    }
+
+    public LocalDateTime getVolta() {
+        return volta;
+    }
+
+    public void setVolta(LocalDateTime volta) {
+        this.volta = volta;
     }
 }
 

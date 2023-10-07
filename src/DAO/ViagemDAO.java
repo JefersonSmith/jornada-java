@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Timestamp;
 
 
 public class ViagemDAO {
@@ -17,14 +18,18 @@ public class ViagemDAO {
 
     public void cadastrarViagem(Viagem viagem) {
 
-        String sql = "INSERT INTO viagens (id_passageiro, id_destino, dia) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO viagens (id_passageiro, id_destino, ida, volta) VALUES (?, ?, ?, ?)";
 
         try {
             conn = Conexao.getConnection();
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, viagem.getPassageiro().getId());
             pstm.setInt(2, viagem.getDestino().getId());
-            pstm.setInt(3, viagem.getDia());
+            Timestamp ida = Timestamp.valueOf(viagem.getIda());
+            pstm.setTimestamp(3, ida);
+            Timestamp volta = Timestamp.valueOf(viagem.getVolta());
+            pstm.setTimestamp(4, volta);
+
             pstm.execute();
             System.out.println("Viagem cadastrada com sucesso!");
         } catch (Exception e) {
@@ -34,15 +39,18 @@ public class ViagemDAO {
 
     public void atualizarViagem(Viagem viagem) {
 
-        String sql = "UPDATE viagens SET id_passageiro = ?, id_destino = ?, dia = ? WHERE id = ?";
+        String sql = "UPDATE viagens SET id_passageiro = ?, id_destino = ?, ida = ?, volta = ? WHERE id = ?";
 
         try {
             conn = conexao.Conexao.getConnection();
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, viagem.getPassageiro().getId());
             pstm.setInt(2, viagem.getDestino().getId());
-            pstm.setInt(3, viagem.getDia());
-            pstm.setInt(4, viagem.getId());
+            Timestamp ida = Timestamp.valueOf(viagem.getIda());
+            pstm.setTimestamp(3, ida);
+            Timestamp volta = Timestamp.valueOf(viagem.getVolta());
+            pstm.setTimestamp(4, volta);
+            pstm.setInt(5, viagem.getId());
             pstm.execute();
             System.out.println("Viagem atualizada com sucesso!");
         } catch (Exception e) {
@@ -83,7 +91,8 @@ public class ViagemDAO {
                 viagem.setId(rset.getInt("id"));
                 viagem.getPassageiro().setId(rset.getInt("id_passageiro"));
                 viagem.getDestino().setId(rset.getInt("id_destino"));
-                viagem.setDia(rset.getInt("dia"));
+                viagem.setIda(rset.getTimestamp("ida").toLocalDateTime());
+                viagem.setVolta(rset.getTimestamp("volta").toLocalDateTime());
                 viagens.add(viagem);
             }
 

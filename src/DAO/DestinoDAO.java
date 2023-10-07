@@ -18,6 +18,7 @@ public class DestinoDAO {
 
         String sql = "INSERT INTO destinos (cidade, pais, preco) VALUES (?, ?, ?)";
 
+
         try {
             conn = Conexao.getConnection();
             pstm = conn.prepareStatement(sql);
