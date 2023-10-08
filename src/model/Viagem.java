@@ -1,13 +1,16 @@
 package model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Viagem {
     private int id;
     private Passageiro passageiro;
     private Destino destino;
-    private LocalDateTime ida;
-    private LocalDateTime volta;
+    private LocalDate ida;
+    private LocalDate volta;
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public int getId() {
         return id;
@@ -33,20 +36,20 @@ public class Viagem {
         this.destino = destino;
     }
 
-    public LocalDateTime getIda() {
-        return ida;
+    public String getIda() {
+        return formatter.format(ida);
     }
 
-    public void setIda(LocalDateTime ida) {
-        this.ida = ida;
+    public void setIda(String ida) {
+        this.ida = LocalDate.parse(ida, formatter);
     }
 
-    public LocalDateTime getVolta() {
-        return volta;
+    public String getVolta() {
+        return formatter.format(volta);
     }
 
-    public void setVolta(LocalDateTime volta) {
-        this.volta = volta;
+    public void setVolta(String volta) {
+        this.volta = LocalDate.parse(volta, formatter);
     }
 }
 

@@ -95,4 +95,32 @@ public class PassageiroDAO {
 
     }
 
+    public Passageiro buscarPassageiro(int id) {
+        String sql = "SELECT * FROM passageiros WHERE id = ?";
+        Passageiro passageiro = new Passageiro();
+        ResultSet rs = null;
+        PreparedStatement pstm = null;
+
+        try {
+            conn = conexao.Conexao.getConnection();
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, id);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                passageiro.setId(rs.getInt("id"));
+                passageiro.setNome(rs.getString("nome"));
+                passageiro.setIdade(rs.getInt("idade"));
+                passageiro.setUsuario(rs.getString("usuario"));
+                passageiro.setSenha(rs.getString("senha"));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar passageiro: " + e.getMessage());
+            return null;
+        }
+        return passageiro;
+
+    }
+
 }

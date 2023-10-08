@@ -3,12 +3,12 @@ package DAO;
 import conexao.Conexao;
 import model.Viagem;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import model.Destino;
+import model.Passageiro;
 
 
 public class ViagemDAO {
@@ -18,17 +18,18 @@ public class ViagemDAO {
 
     public void cadastrarViagem(Viagem viagem) {
 
-        String sql = "INSERT INTO viagens (id_passageiro, id_destino, ida, volta) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO viagens (passageiro_id, destino_id, ida, volta) VALUES (?, ?, ?, ?)";
 
         try {
+
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             conn = Conexao.getConnection();
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, viagem.getPassageiro().getId());
             pstm.setInt(2, viagem.getDestino().getId());
-            Timestamp ida = Timestamp.valueOf(viagem.getIda());
-            pstm.setTimestamp(3, ida);
-            Timestamp volta = Timestamp.valueOf(viagem.getVolta());
-            pstm.setTimestamp(4, volta);
+            pstm.setDate(3, new Date(formatter.parse(viagem.getIda()).getTime()));
+            pstm.setDate(4, new Date(formatter.parse(viagem.getVolta()).getTime()));
+
 
             pstm.execute();
             System.out.println("Viagem cadastrada com sucesso!");
@@ -39,7 +40,7 @@ public class ViagemDAO {
 
     public void atualizarViagem(Viagem viagem) {
 
-        String sql = "UPDATE viagens SET id_passageiro = ?, id_destino = ?, ida = ?, volta = ? WHERE id = ?";
+        String sql = "UPDATE viagens SET passageiro_id = ?, destino_id = ?, ida = ?, volta = ? WHERE id = ?";
 
         try {
             conn = conexao.Conexao.getConnection();
@@ -79,7 +80,12 @@ public class ViagemDAO {
 
         ResultSet rset = null;
 
-        String sql = "SELECT * FROM viagens";
+//        String sql = "SELECT * FROM viagens";
+        String sql = "SELECT v.id, v.ida, v.volta, p.id as passageiro_id, " +
+                "p.nome, p.idade, p.usuario, p.senha, d.id as destino_id, " +
+                "d.cidade, d.pais, d.preco FROM viagens v " +
+                "INNER JOIN passageiros p ON v.passageiro_id = p.id " +
+                "INNER JOIN destinos d ON v.destino_id = d.id";
 
         try {
             conn = conexao.Conexao.getConnection();
@@ -88,11 +94,29 @@ public class ViagemDAO {
 
             while (rset.next()) {
                 Viagem viagem = new Viagem();
+                Passageiro passageiro = new Passageiro();
+                Destino destino = new Destino();
+
                 viagem.setId(rset.getInt("id"));
-                viagem.getPassageiro().setId(rset.getInt("id_passageiro"));
-                viagem.getDestino().setId(rset.getInt("id_destino"));
-                viagem.setIda(rset.getTimestamp("ida").toLocalDateTime());
-                viagem.setVolta(rset.getTimestamp("volta").toLocalDateTime());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+                viagem.setIda(dateFormat.format(rset.getTimestamp("ida")));
+                viagem.setVolta(dateFormat.format(rset.getTimestamp("volta")));
+
+                passageiro.setId(rset.getInt("passageiro_id"));
+                passageiro.setNome(rset.getString("nome"));
+                passageiro.setIdade(rset.getInt("idade"));
+                passageiro.setUsuario(rset.getString("usuario"));
+                passageiro.setSenha(rset.getString("senha"));
+                viagem.setPassageiro(passageiro);
+
+                destino.setId(rset.getInt("destino_id"));
+                destino.setCidade(rset.getString("cidade"));
+                destino.setPais(rset.getString("pais"));
+                destino.setPreco(rset.getDouble("preco"));
+                viagem.setDestino(destino);
+
+
                 viagens.add(viagem);
             }
 

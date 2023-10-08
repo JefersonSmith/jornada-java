@@ -93,4 +93,31 @@ public class DestinoDAO {
 
     }
 
+    public Destino buscarDestino(int id) {
+        String sql = "SELECT * FROM destinos WHERE id = ?";
+        Destino destino = new Destino();
+        ResultSet rs = null;
+        PreparedStatement pstm = null;
+
+        try {
+            conn = Conexao.getConnection();
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, id);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                destino.setId(rs.getInt("id"));
+                destino.setCidade(rs.getString("cidade"));
+                destino.setPais(rs.getString("pais"));
+                destino.setPreco(rs.getDouble("preco"));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar destino: " + e.getMessage());
+            return null;
+        }
+        return destino;
+
+    }
+
 }
