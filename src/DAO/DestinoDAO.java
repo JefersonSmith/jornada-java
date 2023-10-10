@@ -34,7 +34,7 @@ public class DestinoDAO {
 
     public void atualizarDestino(Destino destino) {
 
-        String sql = "UPDATE destinos SET dia = ?, cidade = ?, pais = ?, preco = ? WHERE id = ?";
+        String sql = "UPDATE destinos SET cidade = ?, pais = ?, preco = ? WHERE id = ?";
 
         try {
             conn = Conexao.getConnection();

@@ -43,14 +43,13 @@ public class ViagemDAO {
         String sql = "UPDATE viagens SET passageiro_id = ?, destino_id = ?, ida = ?, volta = ? WHERE id = ?";
 
         try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             conn = conexao.Conexao.getConnection();
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, viagem.getPassageiro().getId());
             pstm.setInt(2, viagem.getDestino().getId());
-            Timestamp ida = Timestamp.valueOf(viagem.getIda());
-            pstm.setTimestamp(3, ida);
-            Timestamp volta = Timestamp.valueOf(viagem.getVolta());
-            pstm.setTimestamp(4, volta);
+            pstm.setDate(3, new Date(formatter.parse(viagem.getIda()).getTime()));
+            pstm.setDate(4, new Date(formatter.parse(viagem.getVolta()).getTime()));
             pstm.setInt(5, viagem.getId());
             pstm.execute();
             System.out.println("Viagem atualizada com sucesso!");

@@ -182,7 +182,9 @@ public class Main {
                                     System.out.println("Cidade: " + d.getCidade());
                                     System.out.println("País: " + d.getPais());
                                     System.out.println("Preço: " + d.getPreco());
+                                    System.out.println("==================================");
                                 }
+                                break;
 
                             case 5:
                                 System.out.println("Saindo...");
@@ -210,9 +212,9 @@ public class Main {
                             idPassageiro = sc.nextInt();
                             System.out.println("Digite o ID do destino: ");
                             idDestino = sc.nextInt();
-                            System.out.println("Digite a data de ida: ");
+                            System.out.println("Digite a data de ida: (DD/MM/YYYY)");
                             ida = sc.next();
-                            System.out.println("Digite a data de volta: ");
+                            System.out.println("Digite a data de volta: (DD/MM/YYYY)");
                             volta = sc.next();
 
                             Passageiro p = passageiroDAO.buscarPassageiro(idPassageiro);
@@ -235,16 +237,28 @@ public class Main {
                             idPassageiro = sc.nextInt();
                             System.out.println("Digite o ID do destino: ");
                             idDestino = sc.nextInt();
-                            System.out.println("Digite a data de ida: ");
+                            System.out.println("Digite a data de ida: (DD/MM/YYYY)");
                             ida = sc.next();
-                            System.out.println("Digite a data de volta: ");
+                            System.out.println("Digite a data de volta: (DD/MM/YYYY)");
                             volta = sc.next();
+
+                            Passageiro p2 = passageiroDAO.buscarPassageiro(idPassageiro);
+                            Destino d2 = destinoDAO.buscarDestino(idDestino);
+
+                            viagem.setId(id);
+                            viagem.setPassageiro(p2);
+                            viagem.setDestino(d2);
+                            viagem.setIda(ida);
+                            viagem.setVolta(volta);
+
+                            viagemDAO.atualizarViagem(viagem);
 
                             break;
 
                         case 3:
                             System.out.println("Digite o ID da viagem que deseja excluir: ");
                             id = sc.nextInt();
+                            viagemDAO.excluirViagem(id);
                             break;
 
                         case 4:
