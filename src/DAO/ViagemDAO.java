@@ -79,7 +79,6 @@ public class ViagemDAO {
 
         ResultSet rset = null;
 
-//        String sql = "SELECT * FROM viagens";
         String sql = "SELECT v.id, v.ida, v.volta, p.id as passageiro_id, " +
                 "p.nome, p.idade, p.usuario, p.senha, d.id as destino_id, " +
                 "d.cidade, d.pais, d.preco FROM viagens v " +
