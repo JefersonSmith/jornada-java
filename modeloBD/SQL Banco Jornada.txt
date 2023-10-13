@@ -1,0 +1,29 @@
+CREATE DATABASE jornada;
+
+USE jornada;
+
+CREATE TABLE passageiros (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255),
+    idade int,
+    usuario VARCHAR(20),
+    senha VARCHAR(40)
+);
+
+CREATE TABLE destinos (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    cidade VARCHAR (50),
+    pais VARCHAR (50),
+    preco DOUBLE,
+    promocao BOOLEAN
+    );
+    
+CREATE TABLE viagens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    passageiro_id INT,
+    destino_id INT,
+    ida DATETIME,
+    volta DATETIME,
+    FOREIGN KEY (passageiro_id) REFERENCES passageiros(id),
+    FOREIGN KEY (destino_id) REFERENCES destinos(id)
+);
