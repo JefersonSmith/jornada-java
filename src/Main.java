@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
+
 public class Main {
     public static void main(String[] args) {
 
@@ -64,39 +65,33 @@ public class Main {
 
                         switch (opcao1) {
                             case 1:
+                                sc.nextLine();
                                 System.out.println("Digite o nome do passageiro: ");
-                                nome = sc.next();
+                                passageiro.setNome(sc.nextLine());
                                 System.out.println("Digite a idade do passageiro: ");
-                                idade = sc.nextInt();
+                                passageiro.setIdade(sc.nextInt());
                                 System.out.println("Digite o usuário(login)): ");
-                                usuario = sc.next();
+                                passageiro.setUsuario(sc.next());
                                 System.out.println("Digite a senha: ");
-                                senha = sc.next();
+                                passageiro.setSenha(sc.next());
 
-                                passageiro.setNome(nome);
-                                passageiro.setIdade(idade);
-                                passageiro.setUsuario(usuario);
-                                passageiro.setSenha(senha);
                                 passageiroDAO.cadastrarPassageiro(passageiro);
                                 break;
 
                             case 2:
                                 System.out.println("Digite o ID do passageiro que deseja editar: ");
                                 int id = sc.nextInt();
-                                System.out.println("Digite o nome do passageiro: ");
-                                nome = sc.next();
-                                System.out.println("Digite a idade do passageiro: ");
-                                idade = sc.nextInt();
-                                System.out.println("Digite o usuário(login)): ");
-                                usuario = sc.next();
-                                System.out.println("Digite a senha: ");
-                                senha = sc.next();
-
                                 passageiro.setId(id);
-                                passageiro.setNome(nome);
-                                passageiro.setIdade(idade);
-                                passageiro.setUsuario(usuario);
-                                passageiro.setSenha(senha);
+                                sc.nextLine();
+                                System.out.println("Digite o nome do passageiro: ");
+                                passageiro.setNome(sc.nextLine());
+                                System.out.println("Digite a idade do passageiro: ");
+                                passageiro.setIdade(sc.nextInt());
+                                System.out.println("Digite o usuário(login)): ");
+                                passageiro.setUsuario(sc.next());
+                                System.out.println("Digite a senha: ");
+                                passageiro.setSenha(sc.next());
+
                                 passageiroDAO.atualizarPassageiro(passageiro);
                                 break;
 
@@ -139,33 +134,29 @@ public class Main {
 
                         switch (opcao1) {
                             case 1:
+                                sc.nextLine();
                                 System.out.println("Digite a cidade do destino: ");
-                                cidade = sc.next();
+                                destino.setCidade(sc.nextLine());
                                 System.out.println("Digite o país do destino: ");
-                                pais = sc.next();
+                                destino.setPais(sc.next());
                                 System.out.println("Digite o preço do destino: ");
-                                preco = sc.nextDouble();
+                                destino.setPreco(sc.nextDouble());
 
-                                destino.setCidade(cidade);
-                                destino.setPais(pais);
-                                destino.setPreco(preco);
                                 destinoDAO.cadastrarDestino(destino);
                                 break;
 
                             case 2:
                                 System.out.println("Digite o ID do destino que deseja editar: ");
                                 int id = sc.nextInt();
-                                System.out.println("Digite a cidade do destino: ");
-                                cidade = sc.next();
-                                System.out.println("Digite o país do destino: ");
-                                pais = sc.next();
-                                System.out.println("Digite o preço do destino: ");
-                                preco = sc.nextDouble();
-
                                 destino.setId(id);
-                                destino.setCidade(cidade);
-                                destino.setPais(pais);
-                                destino.setPreco(preco);
+                                sc.nextLine();
+                                System.out.println("Digite a cidade do destino: ");
+                                destino.setCidade(sc.nextLine());
+                                System.out.println("Digite o país do destino: ");
+                                destino.setPais(sc.next());
+                                System.out.println("Digite o preço do destino: ");
+                                destino.setPreco(sc.nextDouble());
+
                                 destinoDAO.atualizarDestino(destino);
                                 break;
 
